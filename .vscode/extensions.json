@@ -1,0 +1,11 @@
+{
+    "recommendations": [
+        "dbaeumer.vscode-eslint",
+        "svelte.svelte-vscode",
+        "vunguyentuan.vscode-css-variables",
+        "vunguyentuan.vscode-postcss",
+        "stylelint.vscode-stylelint",
+        "ronilaukkarinen.vscode-stylefmt",
+        "github.vscode-github-actions"
+    ],
+}

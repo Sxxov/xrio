@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">
+	<path
+		d="M14.2,20l5.8,5.8L35.8,10H40v4.2L34.2,20l5.8,5.8V30h-4.2L30,24.2L24.4,30h-8.6L10,24.2L4.2,30H0v-4.2 c0,0,5.9-5.8,5.9-5.8l-5.8-5.8V10h4.2l5.8,5.8l5.8-5.8h8.3l2.5,2.5l-4.2,4.2L20,14.2L14.2,20z"
+		style="fill: currentColor" />
+	<style>
+		@media (prefers-color-scheme: dark) {
+			:root {
+				filter: invert(100%);
+			}
+		}
+	</style>
+</svg>

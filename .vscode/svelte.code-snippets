@@ -1,0 +1,28 @@
+{
+	"component": {
+		"prefix": "<script",
+		"body": [
+			"<script lang=\"ts\">",
+			"\t",
+			"</script>",
+			"",
+			"<div class=\"${1}\">",
+			"\t",
+			"</div>",
+			"",
+			"<style lang=\"postcss\">",
+			"\t",
+			"</style>"
+		],
+		"description": "TypeScript + PostCSS, Svelte component"
+	},
+	"fragment": {
+		"prefix": "fragment",
+		"body": [
+			"<svelte:fragment slot=\"${1}\">",
+			"${2}",
+			"</svelte:fragment>"
+		],
+		"description": "Svelte fragment"
+	},
+}

@@ -1,0 +1,51 @@
+/* stylelint-disable custom-property-pattern */
+
+:root {
+	----scrollbar-width: 0px;
+	----scrollbar-height: 0px;
+}
+
+@media screen and (hover: hover) and (pointer: fine) {
+	:root {
+		----scrollbar-width: 12px;
+		----scrollbar-height: 12px;
+	}
+
+	::-webkit-scrollbar {
+		width: var(----scrollbar-width);
+		height: var(----scrollbar-height);
+	}
+
+	::-webkit-scrollbar-button {
+		width: 0;
+		height: 0;
+	}
+
+	::-webkit-scrollbar-thumb {
+		background: var(----colour-background-secondary);
+		border-radius: var(----roundness);
+
+		border: solid 4px var(----colour-background-primary);
+	}
+
+	::-webkit-scrollbar-thumb:hover {
+		background: var(----colour-background-tertiary);
+	}
+
+	::-webkit-scrollbar-thumb:active {
+		background: var(----colour-accent-primary);
+	}
+
+	::-webkit-scrollbar-track {
+		background: var(----colour-background-primary);
+		border-radius: var(----roundness);
+	}
+
+	body::-webkit-scrollbar-track {
+		border-radius: 0;
+	}
+
+	::-webkit-scrollbar-corner {
+		background: transparent;
+	}
+}

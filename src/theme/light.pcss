@@ -1,0 +1,92 @@
+/*
+	stylelint-disable
+		at-rule-no-unknown,
+		custom-property-pattern,
+*/
+
+@import url('./common/easing.pcss');
+@import url('./common/pace.pcss');
+@import url('./common/layout.pcss');
+@import url('./common/typography.pcss');
+@import url('./common/scrollbar.pcss');
+@import url('./common/selection.pcss');
+@import url('./common/lenis.pcss');
+
+:root {
+	@define-mixin light {
+		/* theme */
+		----colour-background-transparent: #f1f5f900;
+		----colour-background-primary: #d8dee6;
+		----colour-background-secondary: #e2e8f0;
+		----colour-background-tertiary: #f1f5f9;
+		----colour-accent-transparent: #ffa4aa00;
+		----colour-accent-primary: #e48087;
+		----colour-accent-secondary: #ffa4aa11;
+		----colour-accent-tertiary: #ffa4aa33;
+		----colour-text-transparent: #11182700;
+		----colour-text-primary: #111827;
+		----colour-text-secondary: #5f6671;
+		----colour-text-tertiary: #1f293733;
+		----colour-overlay: #0003;
+
+		/* filter */
+		----filter-background-primary: brightness(0) saturate(100%) invert(95%) sepia(7%) saturate(290%) hue-rotate(182deg) brightness(93%) contrast(93%);
+		----filter-accent-primary: brightness(0) saturate(100%) invert(73%) sepia(5%) saturate(3165%) hue-rotate(308deg) brightness(95%) contrast(127%);
+		----filter-text-primary: brightness(0) saturate(100%) invert(6%) sepia(36%) saturate(1319%) hue-rotate(186deg) brightness(100%) contrast(93%);
+
+		/* shadow */
+		----shadow-glow-sm: 0 1px 2px 0 var(----colour-accent-secondary);
+		----shadow-glow-md: 0 4px 4px -1px var(----colour-accent-secondary);
+		----shadow-glow-lg: 0 8px 8px -1px var(----colour-accent-secondary);
+		----shadow-glow-xl: 0 16px 16px -1px var(----colour-accent-secondary);
+		----shadow-glow-2xl: 0 25px 25px -3px var(----colour-accent-secondary);
+		----shadow-glow-3xl: 0 35px 35px -5px var(----colour-accent-secondary);
+		----shadow-glow-none: 0 0 0 0 var(----colour-accent-secondary);
+		----shadow-sm:
+			1px 1px 2px 0 rgb(17 24 39 / 3%),
+			-1px -1px 2px 0 rgb(255 255 255 / 25%);
+		----shadow-md:
+			2px 4px 4px -1px rgb(17 24 39 / 6%),
+			-2px -4px 4px -1px rgb(255 255 255 / 25%);
+		----shadow-lg:
+			4px 8px 8px -1px rgb(17 24 39 / 6%),
+			-4px -8px 8px -1px rgb(255 255 255 / 30%);
+		----shadow-xl:
+			8px 16px 16px -1px rgb(17 24 39 / 8%),
+			-8px -16px 16px -1px rgb(255 255 255 / 35%);
+		----shadow-2xl:
+			12.5px 25px 25px -3px rgb(17 24 39 / 8%),
+			-12.5px -25px 25px -3px rgb(255 255 255 / 35%);
+		----shadow-3xl:
+			17.5px 35px 35px -5px rgb(17 24 39 / 8%),
+			-17.5px -35px 35px -5px rgb(255 255 255 / 35%);
+		----shadow-none:
+			0 0 0 0 rgb(17 24 39 / 5%),
+			0 0 0 0 rgb(255 255 255 / 20%);
+		----shadow-inner-sm:
+			inset 1px 1px 2px 0 rgb(17 24 39 / 5%),
+			inset -1px -1px 2px 0 rgb(255 255 255 / 20%);
+		----shadow-inner-md:
+			inset 2px 2px 16px -1px rgb(17 24 39 / 16%),
+			inset -2px -2px 16px -1px rgb(255 255 255 / 42%);
+		----shadow-inner-lg:
+			inset 5px 5px 25px -3px rgb(17 24 39 / 15%),
+			inset -5px -5px 25px -3px rgb(255 255 255 / 40%);
+		----shadow-inner-xl:
+			inset 10px 10px 35px -5px rgb(17 24 39 / 14%),
+			inset -10px -10px 35px -5px rgb(255 255 255 / 38%);
+		----shadow-inner-2xl:
+			inset 12.5px 12.5px 60px -12px rgb(17 24 39 / 25%),
+			inset -12.5px -12.5px 60px -12px rgb(255 255 255 / 60%);
+		----shadow-inner-3xl:
+			inset 17.5px 17.5px 70px -15px rgb(17 24 39 / 30%),
+			inset -17.5px -17.5px 70px -15px rgb(255 255 255 / 70%);
+		----shadow-inner-none:
+			inset 0 0 0 0 rgb(17 24 39 / 5%),
+			inset 0 0 0 0 rgb(255 255 255 / 20%);
+	}
+
+	&.light {
+		@mixin light;
+	}
+}
