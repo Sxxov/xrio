@@ -34,12 +34,6 @@ export const wsConfigureHttpServer = (server: {
 
 		const s = wsServer.get();
 
-		console.log('upgrade', url, {
-			pending,
-			existing,
-			sockets: Object.fromEntries(wsSockets.get()),
-		});
-
 		s.handleUpgrade(req, sock, head, (ws) => {
 			wsSockets.get().set(url, ws);
 			wsSockets.trigger();
