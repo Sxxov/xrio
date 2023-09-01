@@ -5,11 +5,10 @@
 	"main": "",
 	"type": "module",
 	"scripts": {
+		"start": "ts-node --esm --experimental-specifier-resolution=node tools/server/server.ts",
 		"dev": "vite dev --host --https",
 		"build": "vite build",
 		"preview": "vite preview",
-		"notion": "ts-node --esm --experimental-specifier-resolution=node tools/notion.ts",
-		"deploy": "vercel deploy --prebuilt --prod",
 		"postinstall": "patch-package",
 		"prepare": "ts-patch install -s"
 	},
@@ -94,3 +93,4 @@
 		"zod": "^3.22.2"
 	}
 }
+
