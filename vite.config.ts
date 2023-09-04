@@ -1,7 +1,7 @@
 import 'dotenv/config';
 
 import { sveltekit } from '@sveltejs/kit/vite';
-import basicSsl from '@vitejs/plugin-basic-ssl';
+import mkcert from 'vite-plugin-mkcert';
 import resolve from '@rollup/plugin-node-resolve';
 import { imagetools } from 'vite-imagetools';
 import maicHelper from 'maic/helper';
@@ -34,7 +34,7 @@ export default {
 			dedupe: ['svelte'],
 		}),
 		sveltekit(),
-		basicSsl(),
+		mkcert(),
 		inspect({
 			build: true,
 			outputDir: '.vite-inspect',
