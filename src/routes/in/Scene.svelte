@@ -1,7 +1,14 @@
 <script lang="ts">
 	import { useThrelte } from '@threlte/core';
 	import { createEventDispatcher, onMount } from 'svelte';
-	import type { Frame } from '../../lib/io/frame';
+	import {
+		CameraFrameChunk,
+		ControllerFrameChunk,
+		Frame,
+		type FrameValue,
+	} from '../../lib/io/frame';
+	import { Transform } from '../../lib/transform/Transform';
+	import { V3 } from '../../lib/transform/V3';
 
 	const dispatch = createEventDispatcher();
 
@@ -54,86 +61,84 @@
 		renderer.render(scene, $camera);
 
 		if (ws.readyState === ws.OPEN) {
-			const frame = {
-				timestamp: t,
-				controllers: [
-					{
-						transform: {
-							position: {
-								x: controllerLeft.position.x,
-								y: controllerLeft.position.y,
-								z: controllerLeft.position.z,
-							},
-							rotation: {
-								x: controllerLeft.rotation.x,
-								y: controllerLeft.rotation.y,
-								z: controllerLeft.rotation.z,
-							},
-							scale: {
-								x: controllerLeft.scale.x,
-								y: controllerLeft.scale.y,
-								z: controllerLeft.scale.z,
-							},
-						},
-						axes: gamepadLeft?.axes ?? [],
-						buttons:
-							gamepadLeft?.buttons.map(
-								({ pressed, touched, value }) => ({
-									pressed,
-									touched,
-									value,
-								}),
-							) ?? [],
-					},
-					{
-						transform: {
-							position: {
-								x: controllerRight.position.x,
-								y: controllerRight.position.y,
-								z: controllerRight.position.z,
-							},
-							rotation: {
-								x: controllerRight.rotation.x,
-								y: controllerRight.rotation.y,
-								z: controllerRight.rotation.z,
-							},
-							scale: {
-								x: controllerRight.scale.x,
-								y: controllerRight.scale.y,
-								z: controllerRight.scale.z,
-							},
-						},
-						axes: gamepadRight?.axes ?? [],
-						buttons:
-							gamepadRight?.buttons.map(
-								({ pressed, touched, value }) => ({
-									pressed,
-									touched,
-									value,
-								}),
-							) ?? [],
-					},
+			const frame = new Frame(
+				t,
+				[
+					new ControllerFrameChunk(
+						new Transform(
+							new V3(
+								controllerLeft.position.x,
+								controllerLeft.position.y,
+								controllerLeft.position.z,
+							),
+							new V3(
+								controllerLeft.rotation.x,
+								controllerLeft.rotation.y,
+								controllerLeft.rotation.z,
+							),
+							new V3(
+								controllerLeft.scale.x,
+								controllerLeft.scale.y,
+								controllerLeft.scale.z,
+							),
+						),
+						(gamepadLeft?.axes ?? []) as number[],
+						gamepadLeft?.buttons.map(
+							({ pressed, touched, value }) => ({
+								pressed,
+								touched,
+								value,
+							}),
+						) ?? [],
+					),
+					new ControllerFrameChunk(
+						new Transform(
+							new V3(
+								controllerRight.position.x,
+								controllerRight.position.y,
+								controllerRight.position.z,
+							),
+							new V3(
+								controllerRight.rotation.x,
+								controllerRight.rotation.y,
+								controllerRight.rotation.z,
+							),
+							new V3(
+								controllerRight.scale.x,
+								controllerRight.scale.y,
+								controllerRight.scale.z,
+							),
+						),
+						(gamepadRight?.axes ?? []) as number[],
+						gamepadRight?.buttons.map(
+							({ pressed, touched, value }) => ({
+								pressed,
+								touched,
+								value,
+							}),
+						) ?? [],
+					),
 				],
-				camera: {
-					transform: {
-						position: {
-							x: $camera.position.x,
-							y: $camera.position.y,
-							z: $camera.position.z,
-						},
-						rotation: {
-							x: $camera.rotation.x,
-							y: $camera.rotation.y,
-							z: $camera.rotation.z,
-						},
-						scale: {
-							x: $camera.scale.x,
-							y: $camera.scale.y,
-							z: $camera.scale.z,
-						},
-					},
-				},
-			} satisfies Frame;
+				new CameraFrameChunk(
+					new Transform(
+						new V3(
+							$camera.position.x,
+							$camera.position.y,
+							$camera.position.z,
+						),
+						new V3(
+							$camera.rotation.x,
+							$camera.rotation.y,
+							$camera.rotation.z,
+						),
+						new V3(
+							$camera.scale.x,
+							$camera.scale.y,
+							$camera.scale.z,
+						),
+					),
+				),
+			).unbox() satisfies FrameValue;
 
 			console.log(frame);
 
@@ -142,11 +147,10 @@
 	});
 
 	onMount(async () => {
-		dispatch(
-			'vr-button',
-			(
+		dispatch('loaded', {
+			button: (
 				await import('three/addons/webxr/VRButton.js')
 			).VRButton.createButton(renderer),
-		);
+		});
 	});
 </script>

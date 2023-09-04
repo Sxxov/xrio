@@ -1,19 +1,19 @@
 import { ws } from '../../../../../tools/ws/ws';
-import { frame, type Frame } from '../../../../lib/io/frame';
+import { frame, type FrameValue } from '../../../../lib/io/frame';
 
 ws('/api/v1/ws/in', (ws) => {
 	ws.on('message', (raw) => {
-		let data: Frame;
+		let data: FrameValue;
 		try {
 			// eslint-disable-next-line @typescript-eslint/no-base-to-string
-			data = JSON.parse(raw.toString('utf8')) as Frame;
+			data = JSON.parse(raw.toString('utf8')) as FrameValue;
 		} catch (err) {
 			console.error(err);
 			return;
 		}
 
 		const curr = frame.get();
-		if (curr && curr.timestamp > data.timestamp) return;
+		if (curr && curr[0] > data[0]) return;
 
 		frame.set(data);
 	});

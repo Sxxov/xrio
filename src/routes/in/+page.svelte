@@ -7,18 +7,20 @@
 		node.parentNode?.replaceChild(to, node);
 	};
 
+	let loaded = false;
 	let vrButton: HTMLButtonElement | undefined;
 </script>
 
 <div class="in">
-	<div class="vr-button">
-		{#if vrButton}
-			<div use:replace={vrButton}></div>
-		{:else}
+	<div class="content">
+		{#if !loaded}
 			<LoaderCircle
 				height={56}
 				width={56}
 			/>
+		{/if}
+		{#if vrButton}
+			<div use:replace={vrButton}></div>
 		{/if}
 	</div>
 	<Canvas
@@ -28,8 +30,9 @@
 		}}
 	>
 		<Scene
-			on:vr-button={({ detail }) => {
-				vrButton = detail;
+			on:loaded={({ detail: { button } }) => {
+				vrButton = button;
+				loaded = true;
 			}}
 		/>
 	</Canvas>
@@ -45,7 +48,7 @@
 
 		z-index: 999999999;
 
-		& > .vr-button {
+		& > .content {
 			position: absolute;
 			top: 0;
 			left: 0;

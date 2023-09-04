@@ -258,6 +258,10 @@ const CommonOverrideRules = {
 	],
 	// https://github.com/typescript-eslint/typescript-eslint/issues/7358
 	'@typescript-eslint/no-meaningless-void-operator': 'off',
+	'@typescript-eslint/no-namespace': 'off',
+	'no-redeclare': 'off',
+	'@typescript-eslint/no-redeclare': 'off',
+	'no-multi-assign': 'off',
 };
 
 module.exports = {
