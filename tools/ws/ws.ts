@@ -1,13 +1,20 @@
 import type WebSocket from 'ws';
-import { wsSockets } from './wsSockets.js';
+import { wsSubscribers } from './wsSubscribers.js';
+import { ArrayStore } from '@sxxov/ut/store/stores';
 
 export const ws = (url: string, callback: (ws: WebSocket) => void) => {
-	wsSockets.get().set(url, undefined);
-	wsSockets.trigger();
+	const sockets = new ArrayStore<WebSocket>();
 
-	wsSockets.subscribeLazy((sockets) => {
-		const ws = sockets.get(url);
+	wsSubscribers?.push({
+		url,
+		sockets,
+	});
 
-		if (ws) callback(ws);
+	const emitteds = new WeakSet<WebSocket>();
+	sockets.subscribeLazy((s) => {
+		for (const ws of s.filter((v) => !emitteds.has(v))) {
+			callback(ws);
+			emitteds.add(ws);
+		}
 	});
 };
