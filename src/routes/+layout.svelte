@@ -80,12 +80,6 @@
 </main>
 
 <style lang="postcss">
-	:global(html, body) {
-		margin: 0;
-
-		background: var(----colour-background-primary);
-	}
-
 	main {
 		min-height: 100%;
 		width: inherit;
