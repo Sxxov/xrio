@@ -7,7 +7,15 @@ Display 3D models in the browser using [three.js](https://threejs.org/), control
 ```bash
 git clone https://github.com/sxxov/xrio.git
 cd xrio
-npm install
+npm i
+npm run build
+```
+
+## Updating
+
+```bash
+git pull
+npm i
 npm run build
 ```
 
