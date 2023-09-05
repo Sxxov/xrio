@@ -30,7 +30,7 @@ export class V3 implements V3Value {
 	constructor(x: number, y?: number, z?: number) {
 		this.x = x;
 		this.y = y ?? x;
-		this.z = z ?? y ? 0 : x;
+		this.z = z ?? (y ? 0 : x);
 	}
 
 	public static box(vec: V3Value) {
