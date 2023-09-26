@@ -3,11 +3,40 @@
 	import Scene from './Scene.svelte';
 	import { inner } from '@sxxov/ut/viewport';
 	import { LoaderCircle } from '@sxxov/sv/loaders';
+	import { background } from './lib/background';
 
 	let loaded = false;
 </script>
 
-<div class="out">
+<svelte:window
+	on:dragover|preventDefault={({ dataTransfer }) => {
+		if (dataTransfer) dataTransfer.dropEffect = 'link';
+	}}
+	on:drop|preventDefault={async ({ dataTransfer }) => {
+		const reader = new FileReader();
+		const [file] = dataTransfer?.files ?? [];
+
+		if (!file) return;
+
+		const dataUrl = String(
+			await new Promise((resolve) => {
+				reader.addEventListener('load', () => {
+					const { result: file } = reader;
+
+					resolve(file);
+				});
+
+				reader.readAsDataURL(file);
+			}),
+		);
+
+		$background = dataUrl;
+	}}
+/>
+<div
+	class="out"
+	style="background-image: {$background ? `url(${$background})` : '#0000'}"
+>
 	<div class="content">
 		{#if !loaded}
 			<LoaderCircle
@@ -42,6 +71,8 @@
 		left: 0;
 		width: 100vw;
 		height: 100vh;
+
+		background-position: center;
 
 		& > .content {
 			position: absolute;
