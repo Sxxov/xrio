@@ -75,12 +75,13 @@ const getCache = async (db: IDBDatabase) => {
 	});
 };
 
-const setCache = async (db: IDBDatabase, data: string) => {
+const setCache = async (db: IDBDatabase, data: string | undefined) => {
 	return new Promise<void>((resolve, reject) => {
 		const transaction = db.transaction([objectStoreName], 'readwrite');
 		const objectStore = transaction.objectStore(objectStoreName);
-		const newItem = { name: objectStoreRowName, data };
-		const request = objectStore.put(newItem);
+		const request = data
+			? objectStore.put({ name: objectStoreRowName, data })
+			: objectStore.clear();
 
 		request.addEventListener('success', () => {
 			resolve();
@@ -104,8 +105,6 @@ if (browser)
 		if (cache) background.set(cache);
 
 		background.subscribeLazy(async (data) => {
-			if (!data) return;
-
 			await setCache(db, data);
 		});
 	})();
