@@ -2,6 +2,13 @@
 
 Display 3D models in the browser using [three.js](https://threejs.org/), controlled by a connected WebXR-capable headset on the same server.
 
+## Requirements
+
+You will need to have the following programs installed:
+
+1. [NodeJS](https://nodejs.org/en/download/current) version >= 18
+2. [Git](https://git-scm.com/downloads)
+
 ## Installation
 
 ```bash
