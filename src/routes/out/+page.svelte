@@ -52,7 +52,7 @@
 <div
 	class="out"
 	class:clickable
-	style="background: {$background ? `url(${$background}) center` : '#0000'}"
+	style="--image: {$background ? `url(${$background})` : '#0000'}"
 	role="presentation"
 	on:click={() => {
 		if (!clickable) return;
@@ -115,6 +115,10 @@
 		left: 0;
 		width: 100vw;
 		height: 100vh;
+
+		background-image: var(--image);
+		background-size: cover;
+		background-position: center;
 
 		&.clickable {
 			cursor: pointer;
